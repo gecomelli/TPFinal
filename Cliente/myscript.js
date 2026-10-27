@@ -11,6 +11,19 @@
 
   originInput.value = window.location.origin;
 
+// Cargar la dirección de la API desde el almacenamiento local si está disponible
+  var savedOrigin = localStorage.getItem('api-origin');
+  if (savedOrigin) {
+    originInput.value = savedOrigin;
+    document.getElementById('dni').value = localStorage.getItem('dni') || '';
+    document.getElementById('full-name').value = localStorage.getItem('fullName') || '';
+    document.getElementById('sex').value = localStorage.getItem('sex') || '';
+    document.getElementById('age').value = localStorage.getItem('age') || '';
+    document.getElementById('email').value = localStorage.getItem('email') || '';
+    document.getElementById('education').value = localStorage.getItem('education') || '';
+  }
+
+
   function apiUrl(path) {
     var origin;
     try {
@@ -81,6 +94,8 @@
         electionSelect.disabled = false;
         updateCandidates();
         showResult('Se encontraron ' + elections.length + ' encuesta(s) activa(s).', payload);
+          // Guardar la dirección de la API en el almacenamiento local para que persista entre sesiones
+        localStorage.setItem('api-origin', originInput.value);  
       })
       .catch(function(error) {
         showResult(error.message);
@@ -126,5 +141,11 @@
     }).finally(function() {
       submitButton.disabled = false;
     });
+  localStorage.setItem('dni', document.getElementById('dni').value);  
+  localStorage.setItem('fullName', document.getElementById('full-name').value);  
+  localStorage.setItem('sex', document.getElementById('sex').value);  
+  localStorage.setItem('age', document.getElementById('age').value);  
+  localStorage.setItem('email', document.getElementById('email').value);  
+  localStorage.setItem('education', document.getElementById('education').value);  
   });
 })();
