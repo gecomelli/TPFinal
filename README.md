@@ -9,19 +9,19 @@ La aplicacion usa una unica base de datos MongoDB, `encuestasDB`, indicada por `
 - `encuestas`: titulo, descripcion, candidatos (incluidas foto, descripcion y votos), fecha/hora de inicio y finalizacion, estado y fechas de auditoria. Las imagenes cargadas desde el panel se guardan como datos binarios dentro del documento de encuesta.
 - `usuarios`: DNI, nombre, apellido, fecha de creacion, origen externo (`isExternal`) y los identificadores de las encuestas en las que participo.
 
-Desde esta carpeta, instala las dependencias y configura la URI de conexion y la clave privada de la API:
+Desde esta carpeta, instalar las dependencias y configurae la URI de conexion y la clave privada de la API:
 
 ```env
 MONGO_URI=mongodb://localhost:27017/encuestasDB
+MONGO_URI="mongodb+srv://gecomelli_db_user:Ln97OhQR6rLzcA9F@encuestasdb.3n6pym5.mongodb.net"
 PORT=3000
-ADMIN_PASSWORD=una-clave-larga-y-segura
-EXTERNAL_API_KEY=una-clave-larga-y-aleatoria
+ADMIN_PASSWORD=Admin123 
+EXTERNAL_API_KEY=AIzaSyA0g1k6r5J7x8y9z0a1b2c3d4e5f6g7h8i
 API_CORS_ORIGINS=https://sitio-consumidor.example
 ```
 
 Para desarrollo, puedes generar una clave con `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`. No uses una clave real de producción en la página Cliente.
 
-`MONGO_URI` incluye el nombre de la base de datos. Inicia el servidor con:
 
 ```sh
 npm install
@@ -62,14 +62,6 @@ Abre `http://localhost:3000/admin/` para crear, editar y borrar encuestas y cand
 
 Todas las encuestas en estado `open` cuyas fechas incluyan el momento actual aparecen en la portada y permiten votar. Las encuestas en estado `finalized` aparecen en estadisticas, pero no permiten votar. `scheduled` y `closed` no aparecen en las paginas publicas. Las candidaturas con votos no pueden quitarse al editar, y borrar una encuesta requiere confirmacion porque elimina sus resultados.
 
-## Crear una eleccion
-
-Para crear datos de muestra en `encuestasDB`:
-
-```sh
-npm run seed
-```
-
 El comando informa el identificador de la eleccion. Una eleccion solo acepta votos cuando `status` es `open` y la fecha actual esta entre `startsAt` y `endsAt`. Los estados posibles son `scheduled`, `open`, `closed` y `finalized`.
 
 Un documento de eleccion tiene este formato:
@@ -97,20 +89,6 @@ Desde el panel de administracion puedes cargar imagenes JPEG, PNG, GIF o WebP de
 ## Identificacion y voto
 
 La pagina de votacion solicita primero el DNI. Si el DNI existe en `usuarios`, completa nombre y apellido y avisa si ya participo en esa encuesta. Si no existe, solicita nombre y apellido, crea el usuario y luego habilita continuar a la seleccion de candidato. Un mismo usuario solo puede participar una vez en cada encuesta.
-
-El padrón puede cargarse desde un CSV con encabezados `DNI,Nombre,Apellido` (tambien se admite `DNI;Nombre;Apellido`). Si se omite `Apellido`, se interpreta la primera palabra de `Nombre` como nombre y el resto como apellido:
-
-```csv
-DNI,Nombre,Apellido
-12345678,Ana,Perez
-87654321,Juan Maria,Gonzalez
-```
-
-Importalo desde `Server` con:
-
-```sh
-npm run import:voters -- "C:\ruta\al\padron.csv"
-```
 
 El DNI se guarda en claro en `encuestasDB.usuarios`, de acuerdo con el modelo solicitado. Restringe el acceso a esa base de datos y no publiques sus datos.
 
