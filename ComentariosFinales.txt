@@ -1,0 +1,16 @@
+Profesor Mario Di Giorgio, desde ya agradecerle todo lo hecho. A mi el curso me a sido de mucha utilidad y de gran aprendizaje.
+Gracias por su claridad....
+
+El Trabajo practico no es exactamente lo que pidió porque no es una votación única, sino que son encuestas.
+Contempla una pagina principal, una pagina de carga de datos del votante, la votación y pagina de resultado y otra pagina de administracion y creacion de encuestas. Se uso mangoDB con atlas para la base de datos en la nube.
+Y el cliente para probar la API usa también localStorage para guardar los datos del votante para no tener que cargar cada vez que se vota
+Se cargo en GitHub y Vecel (aunque este ultimo costo hacer funcionara mongoDB)
+Se deja el link a este "https://tp-final-three-rosy.vercel.app/"
+
+He aprendido mucho con este trabajo final y aunque mucho esta hecho con la IA, cada cosa he analizado y visto como lo generaba..
+Hay cosas modificadas a manos aunque el autocompletado de la IA fuerza, en el desconocimiento que uno trae, a dejar las cosas el código asi.
+
+Esperando que cumpla con las consignas propuesta quedo a la espera de sus comentarios
+
+Atte
+Gabriel Comelli
