@@ -1,0 +1,39 @@
+
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Iniciar MongoDB",
+      "type": "shell",
+      "command": "& 'C:\\Program Files\\MongoDB\\Server\\8.3\\bin\\mongod.exe' --dbpath 'E:\\Capacitacion\\7-CursoWeb\\Ejercicios\\TP Final\\Server\\data\\db'",
+      "problemMatcher": [],
+      "presentation": {
+        "group": "miproyecto",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "2. Iniciar Node (npm start)",
+      "type": "shell",
+      "command": "npm start",
+      "options": {
+        "cwd": "E:\\Capacitacion\\7-CursoWeb\\Ejercicios\\TP Final\\Server"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "group": "miproyecto",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "🚀 ARRANCAR TODO",
+      "dependsOrder": "parallel",
+      "dependsOn": [
+        "1. Iniciar MongoDB",
+        "2. Iniciar Node (npm start)"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
+

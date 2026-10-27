@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d35">
+  <title>Administrar encuestas | Encuestas</title>
+  <link rel="stylesheet" href="/admin/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Encuestas, inicio">
+      <span class="brand-mark" aria-hidden="true">E</span>
+      <span>Encuestas <small>Administracion</small></span>
+    </a>
+    <nav aria-label="Navegacion principal">
+      <a href="/">Ver sitio</a>
+      <button id="logout-button" class="button button-quiet" type="button" hidden>Cerrar sesion</button>
+    </nav>
+  </header>
+
+  <main class="page-shell">
+    <section id="login-view" class="login-view" aria-labelledby="login-title">
+      <div class="login-card">
+        <span class="eyebrow">Panel privado</span>
+        <h1 id="login-title">Administrar encuestas</h1>
+        <p>Ingresa la clave de administrador para gestionar las encuestas y sus candidaturas.</p>
+        <form id="login-form">
+          <label for="admin-password">Clave de administrador</label>
+          <input id="admin-password" name="password" type="password" autocomplete="current-password" required>
+          <button class="button button-primary" type="submit">Ingresar</button>
+        </form>
+        <p id="login-message" class="message" role="alert" hidden></p>
+      </div>
+    </section>
+
+    <section id="admin-view" hidden>
+      <div class="page-heading">
+        <div>
+          <span class="eyebrow">Gestion</span>
+          <h1>Encuestas</h1>
+          <p>Crea y actualiza encuestas y candidaturas. Las encuestas abiertas dentro de sus fechas permiten votar.</p>
+        </div>
+        <button id="new-election-button" class="button button-primary" type="button">+ Nueva encuesta</button>
+      </div>
+
+      <p id="admin-message" class="message" role="status" hidden></p>
+      <div id="election-list" class="election-list" aria-live="polite"></div>
+      <div id="empty-state" class="empty-state" hidden>
+        <h2>Todavia no hay encuestas</h2>
+        <p>Crea la primera encuesta para empezar a gestionar las votaciones.</p>
+      </div>
+    </section>
+
+    <section id="editor-view" class="editor-view" hidden aria-labelledby="editor-title">
+      <div class="editor-heading">
+        <div>
+          <span class="eyebrow">Configuracion</span>
+          <h1 id="editor-title">Nueva encuesta</h1>
+        </div>
+        <button id="cancel-editor-button" class="button button-quiet" type="button">Volver</button>
+      </div>
+      <form id="election-form" class="editor-card">
+        <input id="election-id" type="hidden">
+        <div class="form-grid">
+          <div class="field field-wide">
+            <label for="election-title">Titulo</label>
+            <input id="election-title" name="title" maxlength="120" required>
+          </div>
+          <div class="field field-wide">
+            <label for="election-description">Descripcion</label>
+            <textarea id="election-description" name="description" rows="3" maxlength="500" required></textarea>
+          </div>
+          <div class="field">
+            <label for="starts-at">Inicio</label>
+            <input id="starts-at" name="startsAt" type="datetime-local" required>
+          </div>
+          <div class="field">
+            <label for="ends-at">Cierre</label>
+            <input id="ends-at" name="endsAt" type="datetime-local" required>
+          </div>
+          <div class="field">
+            <label for="election-status">Estado</label>
+            <select id="election-status" name="status" required>
+              <option value="scheduled">Programada</option>
+              <option value="open">Abierta</option>
+              <option value="closed">Cerrada</option>
+              <option value="finalized">Finalizada</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="candidate-heading">
+          <div>
+            <h2>Candidaturas</h2>
+            <p>Las candidaturas que ya recibieron votos no se pueden quitar. Las imágenes se guardan en la base de datos (máximo 2 MB cada una).</p>
+          </div>
+        </div>
+        <div id="candidate-editor-list" class="candidate-editor-list"></div>
+        <p id="editor-message" class="message" role="alert" hidden></p>
+        <div class="form-actions">
+          <button id="save-election-button" class="button button-primary" type="submit">Guardar encuesta</button>
+          <button id="cancel-editor-bottom" class="button button-quiet" type="button">Cancelar</button>
+          <button id="add-candidate-button" class="button button-secondaryright" type="button">+ Agregar candidatura</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="/admin/app.js" defer></script>
+</body>
+</html>

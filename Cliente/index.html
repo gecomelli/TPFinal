@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cliente de prueba | API de encuestas</title>
+  <link rel="stylesheet" href="mystyles.css">
+  <script src="myscript.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <p class="eyebrow">Cliente de prueba</p>
+      <h1>API de encuestas</h1>
+      <p>Consulta encuestas activas y registra un voto de prueba.</p>
+    </header>
+
+    <section class="card" aria-labelledby="connection-title">
+      <h2 id="connection-title">Conexión</h2>
+      <label for="api-origin">Dirección de la API</label>
+      <input id="api-origin" type="url" placeholder="http://localhost:3000" required>
+      <p class="help">Para usar la API desde otro dominio, agrega el origen de esta página a <code>API_CORS_ORIGINS</code>.</p>
+      <button id="load-elections" type="button">Consultar encuestas activas</button>
+    </section>
+
+    <section class="card" aria-labelledby="vote-title">
+      <h2 id="vote-title">Emitir voto</h2>
+      <form id="vote-form">
+        <label for="election">Encuesta activa</label>
+        <select id="election" size="5" required disabled>
+          <option value="">Primero consulta las encuestas</option>
+        </select>
+
+        <label for="candidate">Candidatura</label>
+        <select id="candidate" size="5" required disabled>
+          <option value="">Selecciona una encuesta</option>
+        </select>
+
+        <fieldset>
+          <legend>Datos del votante (se envían en cada solicitud)</legend>
+          <label for="dni">DNI</label>
+          <input id="dni" name="dni" inputmode="numeric" autocomplete="off" pattern="[0-9. ]{7,12}" required>
+
+          <label for="full-name">Nombre y apellido</label>
+          <input id="full-name" name="fullName" maxlength="60" required>
+
+          <label for="sex">Sexo</label>
+          <select id="sex" name="sex" required>
+            <option value="">Selecciona</option>
+            <option value="F">Femenino</option>
+            <option value="M">Masculino</option>
+          </select>
+
+          <label for="age">Edad</label>
+          <input id="age" name="age" type="number" min="0" max="150" step="1" required>
+
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" maxlength="60" required>
+
+          <label for="education">Nivel educativo</label>
+          <select id="education" name="educationLevel" required>
+            <option value="">Selecciona</option>
+            <option>Primario</option>
+            <option>Secundario</option>
+            <option>Terciario</option>
+            <option>Universitario</option>
+          </select>
+        </fieldset>
+
+        <label for="api-key">Clave API</label>
+        <input id="api-key" type="password" autocomplete="off" required>
+        <p class="warning">La clave se usa solo para esta prueba y no se guarda.</p>
+        <button id="submit-vote" type="submit" disabled>Registrar voto</button>
+      </form>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <pre id="response" hidden></pre>
+  </main>
+</body>
+</html>

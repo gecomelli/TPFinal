@@ -1,0 +1,5 @@
+Server/data
+Server/node_modules
+*.docx
+*.bat
+.env

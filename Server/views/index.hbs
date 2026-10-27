@@ -1,0 +1,43 @@
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">Tu voz cuenta</span>
+    <h1>Elegir también es construir el futuro.</h1>
+    <p>Conoce las encuestas activas y sus opciones. Tu participación nos ayuda a mejorar hacia el futuro.</p>
+  </div>
+</section>
+<section class="page-shell elections-section" id="votaciones">
+  <div class="page-heading">
+    <span class="eyebrow eyebrow-dark">Participa</span>
+    <h2>Encuestas activas</h2>
+    <p>Conoce las opciones y participa en las encuestas vigentes.</p>
+  </div>
+  {{#if elections.length}}
+    <div class="election-grid">
+      {{#each elections}}
+        <article class="election-card">
+          <h3>{{title}}</h3>
+          <p class="election-description">{{description}}</p>
+          {{#if candidates.length}}
+            <div class="election-card-footer">
+              <div class="election-candidates" aria-label="Candidatos de la eleccion">
+                {{#each candidates}}
+                  <div class="election-candidate">
+                    <img src="{{candidateImage this ../_id}}" alt="Foto de {{name}}" title="{{name}}" loading="lazy">
+                  </div>
+                {{/each}}
+              </div>
+              <a class="button button-dark" href="/votaciones/{{_id}}/votar">Votar <span aria-hidden="true">→</span></a>
+            </div>
+          {{else}}
+            <p class="empty-state">Esta votacion todavia no tiene candidatos.</p>
+          {{/if}}
+        </article>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="notice">
+      <h3>No hay encuestas activas</h3>
+      <p class="empty-state">Cuando haya encuestas abiertas dentro de su periodo de votacion, apareceran aqui.</p>
+    </div>
+  {{/if}}
+</section>

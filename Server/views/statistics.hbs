@@ -1,0 +1,33 @@
+<section class="page-shell narrow-shell">
+  <div class="page-heading">
+    <span class="eyebrow eyebrow-dark">Resultados</span>
+    <h1>{{election.title}}</h1>
+    <p>Consulta el total de votos registrados y su distribucion por candidato.</p>
+  </div>
+  <div class="stats-card">
+    <div class="stats-summary">
+      <span class="stats-total">Votos registrados</span>
+      <span class="stats-total"><strong>{{totalVotes}}</strong> votos</span>
+    </div>
+    {{#unless totalVotes}}
+      <p class="empty-state">Todavia no hay votos registrados. Cuando se emita el primero, los resultados apareceran aqui.</p>
+    {{/unless}}
+    <div class="stats-list">
+      {{#each candidates}}
+        <div class="stats-row">
+          <div class="stats-label">
+            <span class="stats-candidate">
+              <img src="{{candidateImage this ../election._id}}" alt="" loading="lazy">
+              <span>{{name}}</span>
+            </span>
+            <strong>{{votes}} votos · {{percentageLabel}}%</strong>
+          </div>
+          <div class="progress-track" role="progressbar" aria-label="Porcentaje de votos de {{name}}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{percentage}}">
+            <div class="progress-bar" style="width: {{percentage}}%"></div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div class="form-actions"><a class="text-link" href="/estadisticas">Ver otras votaciones</a></div>
+  </div>
+</section>

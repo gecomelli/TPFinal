@@ -1,0 +1,40 @@
+<section class="page-shell">
+  <div class="page-heading">
+    <span class="eyebrow eyebrow-dark">{{#if (eq mode 'vote')}}Participa{{else}}Resultados{{/if}}</span>
+    <h1>{{title}}</h1>
+    <p>{{#if (eq mode 'vote')}}Participa en las encuestas abiertas.{{else}}Consulta las encuestas activas y finalizadas.{{/if}}</p>
+  </div>
+  {{#if elections.length}}
+    <div class="election-grid">
+      {{#each elections}}
+        <article class="election-card">
+          <h2>{{title}}</h2>
+          {{#if (eq ../mode 'statistics')}}
+            <p class="election-status">{{#if (eq status 'finalized')}}Finalizada{{else}}Activa{{/if}}</p>
+          {{/if}}
+          <p class="election-description">{{description}}</p>
+          {{#if candidates.length}}
+            <div class="election-candidates">
+              {{#each candidates}}
+                <div class="election-candidate"><img src="{{candidateImage this ../_id}}" alt="Foto de {{name}}" loading="lazy"><span>{{name}}</span></div>
+              {{/each}}
+            </div>
+          {{else}}
+            <p class="empty-state">No hay candidatos cargados para esta votacion.</p>
+          {{/if}}
+          {{#if (eq ../mode 'vote')}}
+            {{#if candidates.length}}
+              <a class="button button-dark" href="/votaciones/{{_id}}/votar">Participar <span aria-hidden="true">→</span></a>
+            {{/if}}
+          {{else}}
+            <a class="button button-dark" href="/estadisticas/{{_id}}">Ver resultados <span aria-hidden="true">→</span></a>
+          {{/if}}
+        </article>
+      {{/each}}
+    </div>
+  {{else}}
+    <div class="notice">
+      <p class="empty-state">{{emptyMessage}}</p>
+    </div>
+  {{/if}}
+</section>

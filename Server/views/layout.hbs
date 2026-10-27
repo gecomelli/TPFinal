@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#123d35">
+  <title>{{title}} | Encuestas</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="icon" type="image/png" href="/images/favicon.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Encuestas, inicio">
+      <span class="brand-mark" aria-hidden="true">E</span>
+      <span>Encuestas</span>
+    </a>
+    <nav class="main-nav" aria-label="Navegacion principal">
+      <a href="/" class="{{#if (eq activePage 'home')}}is-active{{/if}}" {{#if (eq activePage 'home')}}aria-current="page"{{/if}}>Inicio</a>
+      <a href="/votar" class="{{#if (eq activePage 'vote')}}is-active{{/if}}" {{#if (eq activePage 'vote')}}aria-current="page"{{/if}}>Votar</a>
+      <a href="/estadisticas" class="{{#if (eq activePage 'statistics')}}is-active{{/if}}" {{#if (eq activePage 'statistics')}}aria-current="page"{{/if}}>Estadisticas</a>
+      <a href="/admin/">Administrar</a>
+    </nav>
+  </header>
+  <main>
+    {{{body}}}
+  </main>
+  <footer class="site-footer">
+    <a class="brand">
+        <span class="brand-mark" aria-hidden="true">E</span>
+        <span>Encuestas</span>
+    </a>
+    <div class="footer-nav">
+        <p>© Copyright 2026 Todos los derechos reservados.</p>
+        <p>Desarrollado por Gabriel Comelli para trabajo practico Final diplomatura de Desarrollo Web</p>
+        <p><time datetime="2026-07-09 19:00">Publicado: 27 de Octubre de 2026</time></p>
+    </div>
+  </footer>
+
+</body>
+</html>
